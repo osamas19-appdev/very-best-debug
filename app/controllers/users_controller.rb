@@ -12,7 +12,7 @@ class UsersController < ApplicationController
     matching_users = User.where({ :username => username })
     @user = matching_users.at(0)
 
-    render({ :template => "user_templates/user_details.html.erb"})
+    render({ :template => "users_templates/user_details.html.erb"})
   end
   
   def create
@@ -24,13 +24,13 @@ class UsersController < ApplicationController
   end
   
   def update
-    user_id = params.fetch("user_id")
-    matching_users = User.where({ :id => user_id })
+    user_name = params.fetch("user_name")
+    matching_users = User.where({ :username => user_name })
     the_user = matching_users.at(0)
     
     the_user.username = params.fetch("query_username")
     the_user.save
-    redirect_to("/users/#{user.username}")
+    redirect_to("/users/#{the_user.username}")
   end
 
 end
